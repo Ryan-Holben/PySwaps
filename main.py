@@ -1,25 +1,56 @@
 """
-    Convention:  Internally, permutations are represented as n-tuples, and they
-    contain the numbers 0..n-1.  However, for display we will show the numbers
-    1..n.
+Swaps.
+
+Usage:
+    swaps.py <length>
+
+
+Conventions:
+    1. Internally, permutations are represented as n-tuples, and they
+       contain the numbers 0..n-1.  However, for display we will show the
+       numbers 1..n.
+    2. We use left multiplication, i.e.
+          permutation_b = swap_element_1 * swap_element_0 * permutation_a
 """
 
+from docopt import docopt
+
 import swaps
+from math import factorial
 
-p = swaps.permutation.permutation(4)
-s = swaps.swap_element.swap_element(name="a", length=4, i=1, j=2)
-g = swaps.swap_group.swap_group(length=4)
+def get_centered_lines_str(strs, delim):
+    maxlen = max(len(line) for line in strs)
+    format_str = "{:^" + str(maxlen) + "}"
+    return delim.join(format_str.format(line) for line in strs)
 
-for elt in g.elements:
-    print elt*p
+def main(length=4):
+    # phd = swaps.permutohedron.Permutohedron(length = length)
+    # print phd
+    # phd.print_small_output()
+    # print phd.get_row_lengths()
 
-exit()
+    strs = []
+    for length in range(8):
+        phd = swaps.permutohedron.Permutohedron(length = length)
+        strs.append(", ".join(str(i) for i in phd.get_row_lengths()))
+    print get_centered_lines_str(strs, delim="\n\n")
 
-for i in range(0,4):
-    for j in range(0, 4):
-        print p.swap_by_index(i, j),
-    print ""
+#
+# for elt in g.elements:
+#     print elt*p
+#
+# exit()
+#
+# print p.apply_swap_element(g["a"])
+# print p.apply_swap_element(g["b"])
+# print p.apply_swap_element(g["c"])
 
-print p.apply_swap_element(g["a"])
-print p.apply_swap_element(g["b"])
-print p.apply_swap_element(g["c"])
+if __name__ == '__main__':
+    arguments = docopt(__doc__, version='Bop')
+    # print(arguments)
+    try:
+        length = int(arguments["<length>"])
+    except:
+        print "Provide a valid length."
+        exit()
+    main(length)

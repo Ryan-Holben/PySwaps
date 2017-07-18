@@ -2,7 +2,7 @@ from string import ascii_lowercase
 
 import swap_element
 
-class swap_group(object):
+class SwapGroup(object):
     """Encapsulates the subgroup of the permutation group of length 'length',
        where only adjacent pairwise swaps are taken.  (Important: the group will
        consist of `length`-1 swap_elements.)
@@ -13,7 +13,7 @@ class swap_group(object):
         self.elements = []
         for i in range(0, length-1):
             # Note: This fails for length > 26
-            elt = swap_element.swap_element(name=chr(ord("a")+i), length=length, i=i)
+            elt = swap_element.SwapElement(name=chr(ord("a")+i), length=length, i=i)
             self.elements.append(elt)
 
     def __str__(self):

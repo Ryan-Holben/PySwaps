@@ -1,12 +1,13 @@
 import permutation
 
-class swap_element(object):
-    """Represents a single swap action of 2 adjacent elements in a permutation
+class SwapElement(object):
+    """Represents a single swap action of 2 adjacent elements in a Permutation
        (that is, an element of the adjacent swap permutation group of length
        `length`).
     """
 
     def __init__(self, name, length, i, j = None):
+        # TODO: Ought to have checks on i & j
         self.name = name
         self.length = length
         self.i = i
@@ -27,6 +28,6 @@ class swap_element(object):
             IMPORTANT: This convention means we always left-multiply
             permutations by swap_elements.
         """
-        if type(right_permutation) != permutation.permutation:
+        if type(right_permutation) != permutation.Permutation:
             return None
         return right_permutation.apply_swap_element(self)
