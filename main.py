@@ -30,7 +30,7 @@ def main(length=4):
     # print phd.get_row_lengths()
 
     strs = []
-    for length in range(8):
+    for length in range(7):
         phd = swaps.permutohedron.Permutohedron(length = length)
         strs.append(", ".join(str(i) for i in phd.get_row_lengths()))
     print get_centered_lines_str(strs, delim="\n\n")
